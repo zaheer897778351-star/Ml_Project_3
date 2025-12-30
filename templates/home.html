@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Rating Prediction</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 16px;
+        }
+
+        .card-header {
+            background-color: #0d6efd;
+            color: white;
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .btn-primary {
+            font-size: 1.1rem;
+            padding: 10px;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #198754;
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card shadow-lg">
+    <div class="card-header">
+        📝 Review Rating Prediction
+    </div>
+
+    <div class="card-body text-dark">
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+            <!-- Review Text -->
+            <div class="mb-3">
+                <label for="reviewText">Enter Review Text</label>
+                <textarea 
+                    class="form-control" 
+                    id="reviewText" 
+                    name="reviewText" 
+                    rows="6" 
+                    placeholder="Type or paste the product review here..."
+                    required>
+                </textarea>
+            </div>
+
+            <!-- Submit -->
+            <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary">
+                    Predict Rating
+                </button>
+            </div>
+        </form>
+
+        {% if results %}
+        <div class="result-box">
+            ⭐ Predicted Review: {{ results }}
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+</body>
+</html>
